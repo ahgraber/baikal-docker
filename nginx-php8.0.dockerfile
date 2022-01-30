@@ -38,7 +38,7 @@ RUN curl -o /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 COPY --from=builder baikal /var/www/baikal
 RUN chown -R nginx:nginx /var/www/baikal
 COPY files/nginx.conf /etc/nginx/conf.d/default.conf
+COPY files/40-baikal.sh /docker-entrypoint.d
 
 VOLUME /var/www/baikal/config
 VOLUME /var/www/baikal/Specific
-CMD /etc/init.d/php8.0-fpm start && chown -R nginx:nginx /var/www/baikal/Specific && nginx -g "daemon off;"
